@@ -52,8 +52,12 @@ namespace BizContactHelper.Controllers
 
         // DELETE api/<ContactsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public int Delete(int id)
         {
+            var contact = _context.Contacts.Find(id);
+            _context.Contacts.Remove(contact);
+
+            return _context.SaveChanges();
         }
     }
 }

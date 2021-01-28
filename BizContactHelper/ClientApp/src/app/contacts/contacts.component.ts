@@ -23,9 +23,6 @@ export class ContactsComponent {
   }
 
   onSubmit(form: NgForm) {
-    if (form.valid) {
-      console.log('SUBMITTED', form.value);
-    }
     var contact: Contacts = {
       name: form.value.name,
       email: form.value.email,
@@ -44,9 +41,12 @@ export class ContactsComponent {
     form.reset();
   }
 
+  onDelete(id: number) {
+    this.delete(id);
+  }
+
   post(contact: Contacts) {
     this._http.post<Contacts[]>(this._baseUrl + 'api/contacts', contact).subscribe(result => {
-      console.log('Id', result);
       this.get(this._http, this._baseUrl);
     }, error => console.error(error));
   }
@@ -54,7 +54,12 @@ export class ContactsComponent {
   get(http: HttpClient, baseUrl: string) {
     http.get<Contacts[]>(baseUrl + 'api/contacts').subscribe(result => {
       this.contacts = result.reverse();
-      console.log('CONTACTS', this.contacts);
+    }, error => console.error(error));
+  }
+
+  delete(id: number) {
+    this._http.delete<Contacts[]>(this._baseUrl + `api/contacts/${id}`).subscribe(result => {
+      this.get(this._http, this._baseUrl);
     }, error => console.error(error));
   }
 }

@@ -30,6 +30,7 @@
       <th>Email</th>
       <th>City</th>
       <th>State</th>
+      <th>Delete?</th>
     </tr>
   </thead>
   <tbody>
@@ -38,6 +39,7 @@
       <td>{{ contact.email }}</td>
       <td>{{ contact.city }}</td>
       <td>{{ contact.state }}</td>
+      <td><button (click)="onDelete(contact.id)">DELETE</button></td>
     </tr>
   </tbody>
 </table>
