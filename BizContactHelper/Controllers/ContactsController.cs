@@ -23,16 +23,16 @@ namespace BizContactHelper.Controllers
         [HttpGet]
         public IEnumerable<Data.Models.Contact> Get()
         {
-            var test = _context.Contacts.Select(x => x).ToList();
+            var contacts = _context.Contacts.Select(x => x).ToList();
 
-            return test;
+            return contacts;
         }
 
         // GET api/<ContactsController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            throw new NotImplementedException();
         }
 
         // POST api/<ContactsController>
