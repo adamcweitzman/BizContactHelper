@@ -1,0 +1,43 @@
+<h1 id="tableLabel">Business Contacts</h1>
+
+<p>Contacts fetched from server</p>
+
+<p *ngIf="!contacts"><em>Fetching contact data from server...</em></p>
+
+<form #newContactForm="ngForm" (ngSubmit)="onSubmit(newContactForm)">
+  <input type="text" placeholder="Name" class="form-control" id="name"
+         required [(ngModel)]="name" name="name">
+  <input type="text" placeholder="Email" class="form-control" id="email"
+         required [(ngModel)]="email" name="email">
+  <input type="text" placeholder="City" class="form-control" id="city"
+         required [(ngModel)]="city" name="city">
+  <input type="text" placeholder="State" class="form-control" id="state"
+         required [(ngModel)]="state" name="state">
+  <button type="submit" [disabled]="!newContactForm.form.valid">
+    Submit
+  </button>
+
+  <button type="button" (click)="newContactForm.reset()">
+    Reset
+  </button>
+</form>
+
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="contacts">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>City</th>
+      <th>State</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let contact of contacts">
+      <td>{{ contact.name }}</td>
+      <td>{{ contact.email }}</td>
+      <td>{{ contact.city }}</td>
+      <td>{{ contact.state }}</td>
+    </tr>
+  </tbody>
+</table>
